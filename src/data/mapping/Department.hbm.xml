@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN" "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<hibernate-mapping>
+    <class name="data.models.Department" table="department">
+        <id name="departmentID" column="departmentID" type="integer">
+            <generator class="increment"/> 
+        </id>
+        
+        <property name="name" column="name" not-null="true" type="string" />
+        
+        <bag name="roles" table="role" cascade="all">
+            <key column="departmentID"></key>
+            <one-to-many class="data.models.Role"/>
+        </bag>
+        
+        <bag name="sports" table="sports" cascade="all">
+            <key column="departmentID"></key>
+            <one-to-many class="data.models.Sport"/>
+        </bag>
+        
+    </class>
+</hibernate-mapping>
+

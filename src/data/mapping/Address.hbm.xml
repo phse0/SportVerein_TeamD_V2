@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN" "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<hibernate-mapping>
+    <class name="data.models.Address" table="address">
+        <id name="addressID" column="addressID" type="integer">
+            <generator class="increment"/> 
+        </id>
+        
+        <property name="street" column="street" type="string" not-null="true" />
+        <property name="postcode" column="postcode" type="string" not-null="true" />
+        <property name="city" column="city" type="string" not-null="true" />
+        <many-to-one cascade="none" class="data.models.Country" name="country" column="countryID" not-null="true"/>
+  
+         <bag inverse="false" cascade="all" name="persons" table="personAddress">
+            <key column="addressID" />
+            <many-to-many class="data.models.Person" column="personID" />
+        </bag>
+    </class>
+</hibernate-mapping>
+

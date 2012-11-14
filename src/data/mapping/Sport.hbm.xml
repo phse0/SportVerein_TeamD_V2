@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN" "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<hibernate-mapping>
+    <class name="data.models.Sport" table="sport">
+        <id name="sportID" column="sportID">
+            <generator class="increment"/>
+        </id>
+
+        <property name="maxPlayers" column="maxPlayers" not-null="false" type="integer"/>
+        <property name="name" column="name" not-null="true" type="string"/>
+        
+         <many-to-one column="departmentID" name="department" class="data.models.Department" />
+        
+        <bag name="teams" cascade="all" table="team">
+            <key column="sportID" />
+            <one-to-many class="data.models.Team" />
+        </bag>
+        
+        <bag name="tournaments" cascade="all" table="tournament">
+            <key column="sportID" />
+            <one-to-many class="data.models.Tournament" />
+        </bag>
+        
+    </class>
+</hibernate-mapping>
